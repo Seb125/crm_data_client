@@ -4,7 +4,7 @@ import dataService from "../services/data.service";
 
 function Dashboard() {
 const { logOutUser } = useContext(AuthContext);
-const requestBody = {dataToken: "1a48d68f0dbdfc648d07461efd32c363db876c7b"}
+const requestBody = {dataToken: "abc"}
 
 const handleLogout = () => {
     logOutUser();
