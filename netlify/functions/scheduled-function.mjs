@@ -1,4 +1,4 @@
-import dataService from "../services/data.service";
+import dataService from "../../src/services/data.service";
 
 
 export default async () => {
