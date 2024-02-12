@@ -23,6 +23,9 @@ class DataService {
     data = (requestBody) => {
         return this.api.post("/updateData", requestBody);
     };
+    getData = () => {
+        return this.api.get("/getData")
+    }
 }
 
 // Create one instance (object) of the service

@@ -1,0 +1,54 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 40px;
+    background-color: #F39200;
+}
+#mail {
+    padding: 10px;
+}
+
+#pswd {
+    padding : 10px;
+    margin-top: 20px;
+}
+
+#button {
+    margin-top: 50px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+    background-color: #F39200;
+    border-radius: 20px;
+}
+
+.button {
+    border-radius: 5px;
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    margin-top: 10%;
+}
+
+.linechart {
+    width: 100%;
+}

@@ -32,19 +32,19 @@ const Login = () => {
 
 
     return (
-       <div>
-       <form onSubmit={handleLogin}>
-        <label htmlFor="email">Email</label>
+       <div className="center">
+       <form onSubmit={handleLogin} className="loginForm">
+        <label htmlFor="email" id="mail">Email</label>
         <input id="email" name="email" type="email" placeholder=" " value={email} onChange={(e) => setEmail(e.target.value)}/>
        
-       <label htmlFor="password">Password</label>
+       <label htmlFor="password" id="pswd">Password</label>
        <input id="password" name="password" type="password" placeholder=" " value={password} onChange={(e) => setPassword(e.target.value)}/>
        {error && (
         <div>
             {error}
         </div>
        )}
-       <button type="submit">Login</button>
+       <button type="submit" id="button">Login</button>
        </form>
         </div>
     );
