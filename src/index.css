@@ -52,3 +52,19 @@
 .linechart {
     width: 100%;
 }
+
+.table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tableContent {
+    border: black solid;
+    border-radius: 10px;
+    padding: 20px;
+}
+.column {
+    padding-right: 40px;
+}
