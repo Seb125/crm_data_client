@@ -3,7 +3,7 @@ import axios from "axios";
 class DataService {
     constructor() {
         this.api = axios.create({
-            baseURL: import.meta.env.VITE_TEST_API_URL || "https://crm-statistics.adaptable.app"
+            baseURL: "https://crm-statistics.adaptable.app"
         });
     
     // Automatically set JWT token in the headers for every request
