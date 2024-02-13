@@ -2,7 +2,9 @@ import { AuthContext } from "../context/auth.context";
 import { useContext, useState, useEffect } from "react";
 import dataService from "../services/data.service";
 import { LineChart } from 'react-chartkick';
-import 'chartkick/chart.js'
+import 'chartkick/chart.js';
+
+import testService from "../services/test.service";
 
 function Dashboard() {
 const { logOutUser } = useContext(AuthContext);
@@ -13,7 +15,7 @@ const [merged, setMerged] = useState(null)
 
 useEffect(() => {
   const getData = async () => {
-    const response = await dataService.getData();
+    const response = await testService.getData();  // change to datService for production 
     setErpData(response.data.erpData)
     setFiData(response.data.fiData)
     setMerged(response.data.mergedData)
