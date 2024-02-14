@@ -79,7 +79,7 @@ const handleSomething = async () => {
   return (
     <div>
     <nav className="navigation"><button onClick={handleLogout} className="button">Logout</button></nav>
-    <div className="dashboard">
+    <div className="page">
     <h1>Gito CRM Daten</h1>
     <div className="dashboard">
     
@@ -107,7 +107,7 @@ const handleSomething = async () => {
   </div>}
     {erp && <div className="table"> 
     
-      <h2>Inhaltliche Zuordnung enthält ERP</h2>
+      <h2>ERP</h2>
           <table className="tableContent">
             <thead>
               <tr>
@@ -127,7 +127,7 @@ const handleSomething = async () => {
     </div>}
     {fi && <div className="table"> 
     
-    <h2>Inhaltliche Zuordnung enthält Fabrik</h2>
+    <h2>Fabrik</h2>
         <table className="tableContent">
           <thead>
             <tr>
@@ -147,7 +147,7 @@ const handleSomething = async () => {
   </div>}
   {im && <div className="table"> 
     
-    <h2>Inhaltliche Zuordnung enthält Industrie 4.0</h2>
+    <h2>Industrie 4.0</h2>
         <table className="tableContent">
           <thead>
             <tr>
@@ -187,7 +187,7 @@ const handleSomething = async () => {
   </div>}
   {anbErp && <div className="table"> 
     
-    <h2>Anbieter Fabrik und Industrie 4.0</h2>
+    <h2>Anbieter FI/IM</h2>
         <table className="tableContent">
           <thead>
             <tr>
@@ -247,7 +247,7 @@ const handleSomething = async () => {
   </div>}
   {beraterErp && <div className="table"> 
     
-    <h2>Berater Fabrik und Industrie 4.0</h2>
+    <h2>Berater FI/IM</h2>
         <table className="tableContent">
           <thead>
             <tr>
@@ -271,6 +271,8 @@ const handleSomething = async () => {
     {/* erpData ?  <LineChart  data={[{"name": "ERP", "data": erpData, 
     "color": "#F39200"}, {"name": "FI", "data": fiData, "color": "#050c5a"}]}/>  : <p>...Loading</p> */}
     </div>
+    <h1>Gito Campaigns Daten</h1>
+    <LineChart />
     </div>
     </div>
   )
