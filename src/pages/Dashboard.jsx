@@ -18,6 +18,7 @@ const [berater, setBerater] = useState(null);
 const [beraterErp, setBeraterErp] = useState(null);
 const [beraterFiIm, setBeraterFiIm] = useState(null);
 const [allData, setAllData] = useState(null);
+const [campaigns, setCampaigns] = useState(null);
 
 
 
@@ -53,6 +54,7 @@ useEffect(() => {
     setBeraterFiIm(response.data.data.map(el => {
       return {createdAt: el.createdAt, count: el.beraterFiIm}
     }));
+    setCampaigns(response.data.campaigns)
   }
 
   getData();
@@ -69,7 +71,7 @@ const handleLogout = () => {
 const handleSomething = async () => {
   try {
     //const response = await dataService.data({dataToken: "1a48d68f0dbdfc648d07461efd32c363db876c7b"})
-    console.log(erp[0])
+    console.log(campaigns)
   } catch (error) {
     console.log(error)
   }
@@ -265,14 +267,15 @@ const handleSomething = async () => {
           </tbody>
         </table>
   </div>}
-    {/* {allData ? (<div> {allData.map((array, index) => (
-         (<div key={index}> {array[0].createdAt}</div>)
-      ))} </div>) : <p>...Loading</p>} */}
-    {/* erpData ?  <LineChart  data={[{"name": "ERP", "data": erpData, 
-    "color": "#F39200"}, {"name": "FI", "data": fiData, "color": "#050c5a"}]}/>  : <p>...Loading</p> */}
     </div>
     <h1>Gito Campaigns Daten</h1>
-    <LineChart />
+    <div>
+      {campaigns && <div>    
+        {campaigns.map((campaign) => (
+        <p key={campaign.campaign_key}>{campaign.campaign_name}</p>
+      ))}
+      </div>}
+    </div>
     </div>
     </div>
   )

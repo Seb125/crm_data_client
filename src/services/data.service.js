@@ -11,6 +11,9 @@ class DataService {
     data = (requestBody) => {
         return this.api.post("/updateData", requestBody);
     };
+    campaigns = (requestBody) => {
+        return this.api.post("/campaigns", requestBody);
+    };
     
 }
 
