@@ -1,7 +1,5 @@
 import { AuthContext } from "../context/auth.context";
 import { useContext, useState, useEffect } from "react";
-import dataService from "../services/data.service";
-import { LineChart } from 'react-chartkick';
 import 'chartkick/chart.js';
 
 import databaseService from "../services/database.service";
@@ -17,7 +15,6 @@ const [anbFiIm, setAnbFiIm] = useState(null);
 const [berater, setBerater] = useState(null);
 const [beraterErp, setBeraterErp] = useState(null);
 const [beraterFiIm, setBeraterFiIm] = useState(null);
-const [allData, setAllData] = useState(null);
 const [campaigns, setCampaigns] = useState(null);
 
 
@@ -60,9 +57,7 @@ useEffect(() => {
   getData();
 }, []);
 
-useEffect(() => {
-  setAllData([all, erp, fi, im, anbErp, anbFiIm, berater, beraterErp, beraterFiIm])
-}, [beraterFiIm]);
+
 
 const handleLogout = () => {
     logOutUser();
