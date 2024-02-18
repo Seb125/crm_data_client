@@ -267,7 +267,7 @@ const handleSomething = async () => {
     <div>
       {campaigns && <div>    
         {campaigns.map((campaign) => (
-        <p key={campaign.campaign_key}>{campaign.campaign_name}</p>
+        <p key={campaign.campaign_key}><a href={`//${campaign.campaign_preview}`} target="_blank">{campaign.campaign_name}</a></p>
       ))}
       </div>}
     </div>
