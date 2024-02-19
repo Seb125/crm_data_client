@@ -80,7 +80,7 @@ const handleSomething = async () => {
     <h1>Gito CRM Daten</h1>
     <div className="dashboard">
     
-    <button onClick={handleSomething}>HandleSomething</button>
+    {/* <button onClick={handleSomething}>HandleSomething</button> */}
    
     {all && <div className="table"> 
     
