@@ -65,7 +65,7 @@ const handleLogout = () => {
 
 const handleSomething = async () => {
   try {
-    //const response = await dataService.data({dataToken: "1a48d68f0dbdfc648d07461efd32c363db876c7b"})
+    
     console.log(campaigns)
   } catch (error) {
     console.log(error)
@@ -80,7 +80,7 @@ const handleSomething = async () => {
     <h1>Gito CRM Daten</h1>
     <div className="dashboard">
     
-    {/* <button onClick={handleSomething}>HandleSomething</button> */}
+    <button onClick={handleSomething}>HandleSomething</button>
    
     {all && <div className="table"> 
     
@@ -263,14 +263,38 @@ const handleSomething = async () => {
         </table>
   </div>}
     </div>
-    <h1>Gito Campaigns Daten</h1>
-    <div>
-      {campaigns && <div>    
-        {campaigns.map((campaign) => (
-        <p key={campaign.campaign_key}><a href={`//${campaign.campaign_preview}`} target="_blank">{campaign.campaign_name}</a></p>
-      ))}
-      </div>}
-    </div>
+    
+      {campaigns && <div className="table"> 
+    
+      <h2>Gito Campaigns Daten</h2>
+          <table className="tableContent">
+            <thead>
+              <tr>
+                <th className="column">Name</th>
+                <th>Preview</th>
+                <th>Gesendet</th>
+                <th>Geliefert</th>
+                <th>Geliefert_Prozent</th>
+                <th>Öffnungsrate</th>
+                <th>Klickrate</th>
+              </tr>
+            </thead>
+            <tbody>
+              {campaigns.map((campaign) => (
+                <tr key={campaign.campaign_key}>
+                  <td className="column">{campaign.campaign_name}</td>
+                  <td><a href={`//${campaign.campaign_preview}`} target="_blank">Vorschau</a></td>
+                  <td>{campaign.details.count_sent}</td>
+                  <td>{campaign.details.count_delivered}</td>
+                  <td>{campaign.details.percent_delivered}</td>
+                  <td>{campaign.details.percent_open}</td>
+                  <td>{campaign.details.clicksperopenrate}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+    </div>}
+    
     </div>
     </div>
   )
