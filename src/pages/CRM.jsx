@@ -15,10 +15,6 @@ const [anbFiIm, setAnbFiIm] = useState(null);
 const [berater, setBerater] = useState(null);
 const [beraterErp, setBeraterErp] = useState(null);
 const [beraterFiIm, setBeraterFiIm] = useState(null);
-const [campaigns, setCampaigns] = useState(null);
-
-
-
 
 
 useEffect(() => {
@@ -51,7 +47,7 @@ useEffect(() => {
     setBeraterFiIm(response.data.data.map(el => {
       return {createdAt: el.createdAt, count: el.beraterFiIm}
     }));
-    setCampaigns(response.data.campaigns)
+    
   }
 
   getData();
@@ -75,9 +71,8 @@ const handleSomething = async () => {
 
   return (
     <div>
-    <nav className="navigation"><button onClick={handleLogout} className="button">Logout</button></nav>
-    <div className="page">
-    <h1>Gito CRM Daten</h1>
+    
+    
     <div className="dashboard">
     
     {/* <button onClick={handleSomething}>HandleSomething</button> */}
@@ -264,39 +259,10 @@ const handleSomething = async () => {
   </div>}
     </div>
     
-      {campaigns && <div className="table"> 
-    
-      <h2>Gito Campaigns Daten</h2>
-          <table className="tableContent">
-            <thead>
-              <tr>
-                <th className="column">Name</th>
-                <th>Preview</th>
-                <th>Gesendet</th>
-                <th>Geliefert</th>
-                <th>Geliefert_Prozent</th>
-                <th>Öffnungsrate</th>
-                <th>Klickrate</th>
-              </tr>
-            </thead>
-            <tbody>
-              {campaigns.map((campaign) => (
-                <tr key={campaign.campaign_key}>
-                  <td className="column">{campaign.campaign_name}</td>
-                  <td><a href={`//${campaign.campaign_preview}`} target="_blank">Vorschau</a></td>
-                  <td>{campaign.details.count_sent}</td>
-                  <td>{campaign.details.count_delivered}</td>
-                  <td>{campaign.details.percent_delivered}</td>
-                  <td>{campaign.details.percent_open}</td>
-                  <td>{campaign.details.clicksperopenrate}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-    </div>}
+      
     
     </div>
-    </div>
+    
   )
 }
 

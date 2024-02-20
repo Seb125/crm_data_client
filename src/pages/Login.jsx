@@ -22,7 +22,7 @@ const Login = () => {
                 setError("");
                 storeToken(response.data.authToken);
                 authenticateUser();
-                navigate("/");
+                navigate("/crm");
             })
             .catch((error) => {
                 const errorDescription = error.response.data.message;
