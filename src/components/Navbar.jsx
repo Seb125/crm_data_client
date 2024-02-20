@@ -13,7 +13,7 @@ function Navbar() {
         <nav className="navigation">
         <div>
         
-        <span className="naviagtion-element"><Link to={"/crm"}>CRM</Link></span>
+        <span className="naviagtion-element"><Link to={"/"}>CRM</Link></span>
         <span className="naviagtion-element"><Link to={"/campaigns"}>Campaigns</Link></span>
         <span className="naviagtion-element"><Link to={"/web-report"}>Web-Report</Link></span>
         <button onClick={handleLogout} className="button naviagtion-element">Logout</button>

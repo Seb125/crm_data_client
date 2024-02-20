@@ -222,7 +222,7 @@ function Campaigns() {
     }
     return (
     <div id="campaigns-table">
- <button onClick={handleSomething}>HandleSomething</button>
+ {/* <button onClick={handleSomething}>HandleSomething</button> */}
 {campaigns && <div className="table"> 
     
    
