@@ -4,7 +4,7 @@ import 'chartkick/chart.js';
 
 import databaseService from "../services/database.service";
 
-function Dashboard() {
+function Crm() {
 const { logOutUser } = useContext(AuthContext);
 const [all, setAll] = useState(null);
 const [erp, setErp] = useState(null);
@@ -266,4 +266,4 @@ const handleSomething = async () => {
   )
 }
 
-export default Dashboard
+export default Crm;
