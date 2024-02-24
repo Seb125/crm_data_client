@@ -132,6 +132,17 @@ function Campaigns() {
           order: 4,
         },
         {
+          label: "Geöffnet",
+          data: cdelivered.map((number, index) => {
+            return (number*(copenedRate[index]/100))
+          }),
+          backgroundColor: "#828dd7",
+          borderColor: "#828dd7",
+          type: "bar",
+          yAxisID: "y",
+          order: 5,
+        },
+        {
           label: "Gesendet",
           data: csent,
           backgroundColor: "#f3d26a",
