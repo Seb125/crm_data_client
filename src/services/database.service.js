@@ -22,6 +22,9 @@ class DatabaseService {
     getData = () => {
         return this.api.get("/getData")
     }
+    getErpData = () => {
+        return this.api.get("/analytics/erp")
+    }
 }
 
 // Create one instance (object) of the service
