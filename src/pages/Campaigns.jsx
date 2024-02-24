@@ -14,6 +14,7 @@ function Campaigns() {
   const [csent, setCSent] = useState(null);
   const [copenedRate, setCOpenedRate] = useState(null);
   const [cclickedRate, setCClickedRate] = useState(null);
+  const [opened, setOpened] = useState(null);
   const [checked, setChecked] = useState([
     false,
     false,
@@ -62,7 +63,11 @@ function Campaigns() {
           return el.campaign_name;
         })
       );
-      setCDelivered(delivered);
+      setCDelivered(
+        response.data.campaigns.map((el) => {
+          return el.details.count_delivered;
+        })
+      );
       setCSent(
         response.data.campaigns.map((el) => {
           return el.details.count_sent;
@@ -78,6 +83,7 @@ function Campaigns() {
           return el.details.clicksperopenrate;
         })
       );
+      
     };
 
     getData();
@@ -94,6 +100,14 @@ function Campaigns() {
     }
   };
   useEffect(() => {
+    if(cdelivered) {setOpened(
+      cdelivered.map((number, index) => {
+        console.log("deliverded", number)
+        console.log("openedRate", copenedRate[index])
+        return (number*(copenedRate[index]/100))
+      })
+    )
+    }
     // Sample data (replace this with your dynamic data)
     const data = {
       labels: clabels,
@@ -133,9 +147,7 @@ function Campaigns() {
         },
         {
           label: "Geöffnet",
-          data: cdelivered.map((number, index) => {
-            return (number*(copenedRate[index]/100))
-          }),
+          data: opened,
           backgroundColor: "#828dd7",
           borderColor: "#828dd7",
           type: "bar",
