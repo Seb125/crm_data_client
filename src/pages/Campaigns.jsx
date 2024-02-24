@@ -3,6 +3,7 @@ import databaseService from "../services/database.service";
 import Chart from "chart.js/auto";
 
 function Campaigns() {
+  
   const [campaigns, setCampaigns] = useState(null);
   const [labels, setLabels] = useState(null);
   const [delivered, setDelivered] = useState(null);
@@ -15,6 +16,7 @@ function Campaigns() {
   const [copenedRate, setCOpenedRate] = useState(null);
   const [cclickedRate, setCClickedRate] = useState(null);
   const [opened, setOpened] = useState(null);
+  const [copened, setCOpened] = useState(null);
   const [checked, setChecked] = useState([
     false,
     false,
@@ -58,6 +60,18 @@ function Campaigns() {
           return el.details.clicksperopenrate;
         })
       );
+      const percOpened = response.data.campaigns.map((el) => {
+        return el.details.percent_open;
+      })
+      setOpened(
+        response.data.campaigns.map((el) => {
+          return el.details.count_delivered;
+        }).map((del, index) => {
+          return(
+            del*(percOpened[index]/100)
+          )
+        })
+      );
       setCLabels(
         response.data.campaigns.map((el) => {
           return el.campaign_name;
@@ -83,11 +97,21 @@ function Campaigns() {
           return el.details.clicksperopenrate;
         })
       );
+      setCOpened(
+        response.data.campaigns.map((el) => {
+        return el.details.count_delivered;
+      }).map((del, index) => {
+        return(
+          del*(percOpened[index]/100)
+        )
+      }))
       
     };
 
     getData();
   }, []);
+  
+
 
   const handleSomething = async () => {
     try {
@@ -99,126 +123,129 @@ function Campaigns() {
       console.log(error);
     }
   };
+  
   useEffect(() => {
-    if(cdelivered) {setOpened(
-      cdelivered.map((number, index) => {
-        console.log("deliverded", number)
-        console.log("openedRate", copenedRate[index])
-        return (number*(copenedRate[index]/100))
-      })
-    )
+    const makeChart = async () => {
+      try {
+        
+        // Sample data (replace this with your dynamic data)
+        const data = {
+          labels: clabels,
+          datasets: [
+            {
+              label: "Öffnungsrate",
+              data: copenedRate,
+              borderColor: "#828dd7",
+              backgroundColor: "#828dd7",
+              pointStyle: "triangle", // Set point style to triangle
+              pointRadius: 8,
+              type: "line", // Line chart for Dataset 2
+              yAxisID: "y1",
+              order: 2,
+            },
+            {
+              label: "Klickrate",
+              data: cclickedRate,
+              borderColor: "#abcfeb",
+              backgroundColor: "#abcfeb",
+              pointStyle: "triangle", // Set point style to diamond
+              pointRadius: 8,
+              type: "line", // Line chart for Dataset 2
+              yAxisID: "y1",
+              order: 1,
+            },
+            {
+              label: "Zugestellt",
+              data: cdelivered,
+              backgroundColor: "#3dd2da",
+              borderColor: "#3dd2da",
+              pointStyle: "diamond", // Set point style to diamond
+              pointRadius: 8,
+              type: "bar",
+              yAxisID: "y",
+              order: 4,
+            },
+            {
+              label: "Geöffnet",
+              data: copened,
+              backgroundColor: "#828dd7",
+              borderColor: "#828dd7",
+              type: "bar",
+              yAxisID: "y",
+              order: 5,
+            },
+            {
+              label: "Gesendet",
+              data: csent,
+              backgroundColor: "#f3d26a",
+              borderColor: "#f3d26a",
+              pointStyle: "diamond", // Set point style to diamond
+              pointRadius: 8,
+              type: "bar",
+              yAxisID: "y",
+              order: 5,
+            },
+          ],
+        };
+        // const klicks = [280, 290, 315, 336, 260]
+        // let offnungsrate = [];
+        // let klickrate = [];
+        // data.datasets[3].data.forEach((element, index) => {
+        //     if(data.datasets[2].data[index] != 0) offnungsrate.push(element/data.datasets[2].data[index])
+        // });
+        // data.datasets[0].data = offnungsrate;
+    
+        // data.datasets[3].data.forEach((element, index) => {
+        //     console.log(element)
+        //     if(element != 0) klickrate.push(klicks[index]/element)
+        // })
+        // data.datasets[1].data = klickrate;
+    
+        // console.log(klickrate)
+    
+        // Chart configuration
+        const config = {
+          data: data,
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                position: "left",
+              },
+              x: {
+                grid: {
+                  drawOnChartArea: false, // Hide y-axis grid lines inside the chart area
+                },
+              },
+              y1: {
+                beginAtZero: true,
+                position: "right",
+                grid: {
+                  drawOnChartArea: false, // Hide y-axis grid lines inside the chart area
+                },
+              },
+            },
+          },
+        };
+        // Create a new chart
+        
+        if (chartContainer.current) {
+          myChart = new Chart(chartContainer.current, config);
+        }
+    
+        
+      } catch (error) {
+        console.log(error)
+      }
     }
-    // Sample data (replace this with your dynamic data)
-    const data = {
-      labels: clabels,
-      datasets: [
-        {
-          label: "Öffnungsrate",
-          data: copenedRate,
-          borderColor: "#828dd7",
-          backgroundColor: "#828dd7",
-          pointStyle: "triangle", // Set point style to triangle
-          pointRadius: 8,
-          type: "line", // Line chart for Dataset 2
-          yAxisID: "y1",
-          order: 2,
-        },
-        {
-          label: "Klickrate",
-          data: cclickedRate,
-          borderColor: "#abcfeb",
-          backgroundColor: "#abcfeb",
-          pointStyle: "triangle", // Set point style to diamond
-          pointRadius: 8,
-          type: "line", // Line chart for Dataset 2
-          yAxisID: "y1",
-          order: 1,
-        },
-        {
-          label: "Zugestellt",
-          data: cdelivered,
-          backgroundColor: "#3dd2da",
-          borderColor: "#3dd2da",
-          pointStyle: "diamond", // Set point style to diamond
-          pointRadius: 8,
-          type: "bar",
-          yAxisID: "y",
-          order: 4,
-        },
-        {
-          label: "Geöffnet",
-          data: opened,
-          backgroundColor: "#828dd7",
-          borderColor: "#828dd7",
-          type: "bar",
-          yAxisID: "y",
-          order: 5,
-        },
-        {
-          label: "Gesendet",
-          data: csent,
-          backgroundColor: "#f3d26a",
-          borderColor: "#f3d26a",
-          pointStyle: "diamond", // Set point style to diamond
-          pointRadius: 8,
-          type: "bar",
-          yAxisID: "y",
-          order: 5,
-        },
-      ],
-    };
-    // const klicks = [280, 290, 315, 336, 260]
-    // let offnungsrate = [];
-    // let klickrate = [];
-    // data.datasets[3].data.forEach((element, index) => {
-    //     if(data.datasets[2].data[index] != 0) offnungsrate.push(element/data.datasets[2].data[index])
-    // });
-    // data.datasets[0].data = offnungsrate;
-
-    // data.datasets[3].data.forEach((element, index) => {
-    //     console.log(element)
-    //     if(element != 0) klickrate.push(klicks[index]/element)
-    // })
-    // data.datasets[1].data = klickrate;
-
-    // console.log(klickrate)
-
-    // Chart configuration
-    const config = {
-      data: data,
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            position: "left",
-          },
-          x: {
-            grid: {
-              drawOnChartArea: false, // Hide y-axis grid lines inside the chart area
-            },
-          },
-          y1: {
-            beginAtZero: true,
-            position: "right",
-            grid: {
-              drawOnChartArea: false, // Hide y-axis grid lines inside the chart area
-            },
-          },
-        },
-      },
-    };
-    // Create a new chart
     let myChart;
-    if (chartContainer.current) {
-      myChart = new Chart(chartContainer.current, config);
-    }
-
+    makeChart();
     return () => {
       if (myChart) {
         myChart.destroy();
       }
     };
-  }, [clabels, cclickedRate, copenedRate, csent, cdelivered]);
+  }, [clabels, cclickedRate, copenedRate, csent, cdelivered, copened]);
 
   const handleCheck = (index) => {
     const updatedChecked = [...checked];
@@ -231,6 +258,7 @@ function Campaigns() {
     let updatedOpenedRate = [...openedRate];
     let updatedclickedRate = [...clickedRate];
     let updatedLabels = [...labels];
+    let updatedOpened = [...opened];
     const filterDelivered = updatedDelivered.filter((element, index) => {
       return checked[index];
     });
@@ -246,11 +274,15 @@ function Campaigns() {
     const filterLabels = updatedLabels.filter((element, index) => {
       return checked[index];
     });
+    const filterOpened = updatedOpened.filter((element, index) => {
+      return checked[index];
+    });
     setCDelivered(filterDelivered);
     setCSent(filterSent);
     setCOpenedRate(filterOpenedRate);
     setCClickedRate(filterClickedRate);
     setCLabels(filterLabels);
+    setCOpened(filterOpened);
   };
   const download = () => {
     const canvas = document.getElementById("downloadChart");
