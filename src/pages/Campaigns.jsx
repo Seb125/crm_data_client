@@ -291,14 +291,11 @@ function Campaigns() {
       // Capture the table as an image
       const tableCanvas = await html2canvas(document.getElementById("campaigns-table"));
   
-      // Capture the chart as an image
-      const chartCanvas = await html2canvas(chartContainer.current);
-  
       // Create a new canvas to combine table and chart
-      const combinedCanvas = document.createElement("canvas");
-      const context = combinedCanvas.getContext("2d");
-      combinedCanvas.width = Math.max(tableCanvas.width, chartCanvas.width);
-      combinedCanvas.height = tableCanvas.height + chartCanvas.height;
+         const combinedCanvas = document.createElement("canvas");
+         const context = combinedCanvas.getContext("2d");
+      // combinedCanvas.width = Math.max(tableCanvas.width, chartCanvas.width);
+      // combinedCanvas.height = tableCanvas.height + chartCanvas.height;
   
       // Draw the table image on the combined canvas
       context.drawImage(tableCanvas, 0, 0);
@@ -307,7 +304,7 @@ function Campaigns() {
       //context.drawImage(chartCanvas, 0, tableCanvas.height);
   
       // Convert the combined canvas to an image
-      const combinedImage = combinedCanvas.toDataURL("image/png");
+      const combinedImage = tableCanvas.toDataURL("image/png");
   
       // Create a download link for the combined image
       const link = document.createElement("a");
